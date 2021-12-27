@@ -21,10 +21,17 @@
   background-color: blue;
 }
 
+#pixel-board {
+  display: grid;
+  grid-template-columns: repeat(5, 42px);
+  /* 
+    Buscando soluções no google encontrei o display grid: 
+    https://developer.mozilla.org/pt-BR/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout 
+  */
+}
 .pixel {
   background-color: white;
   width: 40px;
   height: 40px;
   border: 1px solid black;
-  display: inline-block;
 }
