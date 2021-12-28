@@ -18,6 +18,13 @@ function pixelClick(event) {
   */
 }
 
+function clearColors(event) {
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+}
+
 const colors = document.getElementsByClassName('color');
 
 for (let index = 0; index < colors.length; index += 1) {
@@ -29,3 +36,5 @@ const pixels = document.getElementsByClassName('pixel');
 for (let index = 0; index < pixels.length; index += 1) {
   pixels[index].addEventListener('click', pixelClick);
 }
+
+document.getElementById('clear-board').addEventListener('click', clearColors);
