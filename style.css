@@ -10,32 +10,42 @@
 }
 
 .black {
-  background-color: black;
+background-color: black;
 }
 
 .red {
-  background-color: red;
+background-color: red;
 }
 
 .green {
-  background-color: green;
+background-color: green;
 }
 
 .blue {
-  background-color: blue;
+background-color: blue;
+}
+
+#board-size {
+width: 120px;
+appearance: textfield;
+}
+
+#board-size::-webkit-inner-spin-button , #board-size::-webkit-outer-spin-button {
+appearance: none;
+margin: 0;
 }
 
 #pixel-board {
-  display: grid;
-  grid-template-columns: repeat(5, 40px);
-  margin-top: 20px;
-  margin-left: 3px;
-  width: 240px;
+display: grid;
+grid-template-columns: repeat(5, 40px);
+margin-top: 20px;
+margin-left: 3px;
+width: 240px;
 }
 
 .pixel {
-  background-color: white;
-  border: 1px solid black;
-  height: 40px;
-  width: 40px;
+background-color: white;
+border: 1px solid black;
+height: 40px;
+width: 40px;
 }
