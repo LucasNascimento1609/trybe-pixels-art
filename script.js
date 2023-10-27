@@ -1,11 +1,7 @@
-function colorClick(event) {
+function colorSelected({ target }) {
   const selectedColor = document.querySelector('.selected');
-  selectedColor.classList.remove('selected');
-  event.target.classList.add('selected');
-
-  /*
-    Não me recordava como adicionar uma classe e ao buscar no google encontrei:
-    https://pt.stackoverflow.com/questions/225809/como-adicionar-uma-classe-em-javascript-puro */
+  selectedColor.classList.toggle('selected');
+  target.classList.add('selected');
 }
 
 function pixelClick(event) {
@@ -26,9 +22,8 @@ function clearColors(event) {
 }
 
 const colors = document.getElementsByClassName('color');
-
 for (let index = 0; index < colors.length; index += 1) {
-  colors[index].addEventListener('click', colorClick);
+  colors[index].addEventListener('click', colorSelected);
 }
 
 const pixels = document.getElementsByClassName('pixel');
