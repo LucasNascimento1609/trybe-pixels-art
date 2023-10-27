@@ -4,14 +4,16 @@ function colorSelected({ target }) {
   target.classList.add('selected');
 }
 
-function pixelClick(event) {
-  const selectedColor = document.querySelector('.selected');
-  event.target.style.backgroundColor =
-    getComputedStyle(selectedColor).backgroundColor;
-
-  /* 
-    https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle 
-  */
+function colorPixel(event) {
+  const selectedBackgroundColor = document.querySelector('.selected').backgroundColor;
+  const { target } = event;
+  const currentPixelColor = getComputedStyle(target).backgroundColor;
+  
+  if (currentPixelColor === selectedBackgroundColor) {
+    target.style.backgroundColor = 'white';
+  } else {
+    target.style.backgroundColor = selectedBackgroundColor;
+  }
 }
 
 function clearColors(event) {
@@ -27,9 +29,8 @@ for (let index = 0; index < colors.length; index += 1) {
 }
 
 const pixels = document.getElementsByClassName('pixel');
-
 for (let index = 0; index < pixels.length; index += 1) {
-  pixels[index].addEventListener('click', pixelClick);
+  pixels[index].addEventListener('click', colorPixel);
 }
 
 document.getElementById('clear-board').addEventListener('click', clearColors);
