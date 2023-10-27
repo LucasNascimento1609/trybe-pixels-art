@@ -58,6 +58,14 @@ function handleEnterKey(event) {
   if (event.key === 'Enter') generateBoard();
 }
 
+function generateColorPalette() {
+  const red = Math.floor(Math.random() * 237);
+  const green = Math.floor(Math.random() * 237);
+  const blue = Math.floor(Math.random() * 237);
+
+  return `${red}, ${green}, ${blue}`;
+}
+
 const colors = document.getElementsByClassName('color');
 for (let index = 0; index < colors.length; index += 1) {
   colors[index].addEventListener('click', colorSelected);
@@ -70,3 +78,6 @@ for (let index = 0; index < pixels.length; index += 1) {
 
 document.getElementById('clear-board').addEventListener('click', clearBoard);
 document.getElementById('generate-board').addEventListener('click', generateBoard);document.getElementById('board-size').addEventListener('keydown', handleEnterKey);
+document.querySelector('.red').style.backgroundColor = `rgb(${generateColorPalette()})`;
+document.querySelector('.green').style.backgroundColor = `rgb(${generateColorPalette()})`;
+document.querySelector('.blue').style.backgroundColor = `rgb(${generateColorPalette()})`;
