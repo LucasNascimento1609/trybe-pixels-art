@@ -5,10 +5,10 @@ function colorSelected({ target }) {
 }
 
 function colorPixel(event) {
-  const selectedBackgroundColor = document.querySelector('.selected').backgroundColor;
+  const selectedBackgroundColor = getComputedStyle(document.querySelector('.selected')).backgroundColor;
   const { target } = event;
   const currentPixelColor = getComputedStyle(target).backgroundColor;
-  
+
   if (currentPixelColor === selectedBackgroundColor) {
     target.style.backgroundColor = 'white';
   } else {
