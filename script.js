@@ -1,40 +1,82 @@
-function colorClick(event) {
+function handleColorSelect({ target }) {
   const selectedColor = document.querySelector('.selected');
-  selectedColor.classList.remove('selected');
-  event.target.classList.add('selected');
-
-  /*
-    Não me recordava como adicionar uma classe e ao buscar no google encontrei:
-    https://pt.stackoverflow.com/questions/225809/como-adicionar-uma-classe-em-javascript-puro */
+  selectedColor.classList.toggle('selected');
+  target.classList.add('selected');
 }
 
-function pixelClick(event) {
-  const selectedColor = document.querySelector('.selected');
-  event.target.style.backgroundColor =
-    getComputedStyle(selectedColor).backgroundColor;
+function onColorPixel(event) {
+  const selectedBackground = getComputedStyle(document.querySelector('.selected')).backgroundColor;
+  const { target } = event;
+  const currentPixelColor = getComputedStyle(target).backgroundColor;
 
-  /* 
-    https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle 
-  */
+  if (currentPixelColor === selectedBackground) {
+    target.style.backgroundColor = 'white';
+  } else {
+    target.style.backgroundColor = selectedBackground;
+  }
 }
 
-function clearColors(event) {
+function clearBoard() {
   const pixels = document.querySelectorAll('.pixel');
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].style.backgroundColor = 'white';
   }
 }
 
-const colors = document.getElementsByClassName('color');
+function validateBoard(boardSize) {
+  if (boardSize < 5) return 5;
+  if (boardSize > 50) return 50;
+  if (Number.isNaN(boardSize)) return false;
+  return boardSize;
+}
 
+function resetPixelBoard(boardSize) {
+  const pixelBoard = document.getElementById('pixel-board');
+  pixelBoard.innerHTML = '';
+  pixelBoard.style.gridTemplateColumns = `repeat(${boardSize}, 40px)`;
+}
+
+function generateBoard() {
+  const boardSize = parseInt(document.getElementById('board-size').value, 10);
+
+  const validBoard = validateBoard(boardSize);
+  if (!validBoard) return alert('Board inválido!');
+  resetPixelBoard(validBoard);
+
+  for (let i = 0; i < validBoard * validBoard; i += 1) {
+    const pixel = document.createElement('div');
+    pixel.classList.add('pixel');
+    pixel.style.backgroundColor = 'white';
+    pixel.addEventListener('click', onColorPixel);
+    document.getElementById('pixel-board').appendChild(pixel);
+  }
+}
+
+function handleEnterKey(event) {
+  if (event.key === 'Enter') generateBoard();
+}
+
+function generateColorPalette() {
+  const red = Math.floor(Math.random() * 237);
+  const green = Math.floor(Math.random() * 237);
+  const blue = Math.floor(Math.random() * 237);
+
+  return `${red}, ${green}, ${blue}`;
+}
+
+const colors = document.getElementsByClassName('color');
 for (let index = 0; index < colors.length; index += 1) {
-  colors[index].addEventListener('click', colorClick);
+  colors[index].addEventListener('click', handleColorSelect);
 }
 
 const pixels = document.getElementsByClassName('pixel');
-
 for (let index = 0; index < pixels.length; index += 1) {
-  pixels[index].addEventListener('click', pixelClick);
+  pixels[index].addEventListener('click', onColorPixel);
 }
 
-document.getElementById('clear-board').addEventListener('click', clearColors);
+document.getElementById('clear-board').addEventListener('click', clearBoard);
+document.getElementById('generate-board').addEventListener('click', generateBoard);
+document.getElementById('board-size').addEventListener('keydown', handleEnterKey);
+document.querySelector('.red').style.backgroundColor = `rgb(${generateColorPalette()})`;
+document.querySelector('.green').style.backgroundColor = `rgb(${generateColorPalette()})`;
+document.querySelector('.blue').style.backgroundColor = `rgb(${generateColorPalette()})`;
