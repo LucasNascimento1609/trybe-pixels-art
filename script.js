@@ -4,7 +4,7 @@ function handleColorSelect({ target }) {
   target.classList.add('selected');
 }
 
-function colorPixel(event) {
+function onColorPixel(event) {
   const selectedBackground = getComputedStyle(document.querySelector('.selected')).backgroundColor;
   const { target } = event;
   const currentPixelColor = getComputedStyle(target).backgroundColor;
@@ -47,7 +47,7 @@ function generateBoard() {
     const pixel = document.createElement('div');
     pixel.classList.add('pixel');
     pixel.style.backgroundColor = 'white';
-    pixel.addEventListener('click', colorPixel);
+    pixel.addEventListener('click', onColorPixel);
     document.getElementById('pixel-board').appendChild(pixel);
   }
 }
@@ -71,7 +71,7 @@ for (let index = 0; index < colors.length; index += 1) {
 
 const pixels = document.getElementsByClassName('pixel');
 for (let index = 0; index < pixels.length; index += 1) {
-  pixels[index].addEventListener('click', colorPixel);
+  pixels[index].addEventListener('click', onColorPixel);
 }
 
 document.getElementById('clear-board').addEventListener('click', clearBoard);
