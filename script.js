@@ -43,14 +43,12 @@ function generateBoard() {
   if (!validBoard) return alert('Board inválido!');
   resetPixelBoard(validBoard);
 
-  for (let i = 0; i < validBoard; i += 1) {
-    for (let j = 0; j < validBoard; j += 1) {
-      const pixel = document.createElement('div');
-      pixel.classList.add('pixel');
-      pixel.style.backgroundColor = 'white';
-      pixel.addEventListener('click', colorPixel);
-      document.getElementById('pixel-board').appendChild(pixel);
-    }
+  for (let i = 0; i < validBoard * validBoard; i += 1) {
+    const pixel = document.createElement('div');
+    pixel.classList.add('pixel');
+    pixel.style.backgroundColor = 'white';
+    pixel.addEventListener('click', colorPixel);
+    document.getElementById('pixel-board').appendChild(pixel);
   }
 }
 
