@@ -1,4 +1,4 @@
-function colorSelected({ target }) {
+function handleColorSelect({ target }) {
   const selectedColor = document.querySelector('.selected');
   selectedColor.classList.toggle('selected');
   target.classList.add('selected');
